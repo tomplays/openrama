@@ -2,20 +2,31 @@ var io;
 var socket;
 var says;
 
+	
 var chalk = require('chalk'),
  _ = require('underscore');
 
+exports.pusher = function(socket, data, players_){
+			console.log('pusher') 
 
-exports.socketer = function(socket, data){
+			console.log(players_) 
+
+_.each(players_, function(player){
+
+	player.videos.push(data)
+})
 
 
-	var players_ = []
+			socket.emit('pushed', data);
+     		socket.broadcast.emit('pushed', data);
+
+}
+
+exports.socketer = function(socket, data, players_){
 
 
-	var player_bus = {'lat':'48.8819132031', 'long': '2.3260' } 
-
-players_.push(player_bus)
-console.log(players_)
+	
+			console.log('already set fresh') 
 
 
 	_.each(players_, function(player){
@@ -34,13 +45,17 @@ console.log(players_)
 
 
 
-			if(diff<0.001){
+			if(diff<0.00006270591957237519){
 				console.log('1 metre far')
+				
+			
 			}
 			else{
 				console.log('else')
 			}
 
+	 			socket.emit('pong', player);
+     			socket.broadcast.emit('pong', player);
 
 
 
@@ -52,8 +67,7 @@ console.log(players_)
 	console.log(data)
 	console.log(chalk.green('got ping'))
 
-     socket.emit('pong', {'letter': 'ds'});
-     socket.broadcast.emit('pong', {'letter': 'ds'});
+    
 
 	//socket.emit('newsback', data)
 	//socket.broadcast.to('homepage').emit('newsback', data)

@@ -1,150 +1,18 @@
-
-
-
-ul{margin:0; padding:0;}
-.voter {
-    background: rgb(236, 240, 241) none repeat scroll 0 0;
-    border-radius: 7px;
-    margin-bottom: 2%;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
-    min-height: 324px;
-    padding: 6px;
-    width: 18%;
+.player_ iframe{
+	border:2px solid red;
+	height:100px;
+	width:100px;
 }
 
- .group_LES-REP{
- 	border-top:4px solid #4aa3df;
- }
-  .group_SRC,   .group_SOC,  .group_RDSE{
- 	border-top:4px solid #c93c72;
- }
-
-  .group_UDI{
- 	border-top:4px solid #5022ba;
- }
-  .group_CRC{
- 	border-top:4px solid #ce2913;
- }
-  .group_ECO{
- 	border-top:4px solid #16a085;
- }
- .group_NI{
- 	border-top:4px solid #2c3e50;
- }
-
-.voter.position_Pour h3{
- 	color: #27ae60;
- }
-.voter.position_Contre h3{
- 	color: #c0392b;
- }
-
-.voter.position_Abstention h3{
- 	color: #fff;
- }
-
-.voter.position_Inconnue h3{
- 	color: #dadada;
- }
-
-
- .voter.type_citoyen.byme_true{
- 	background: pink;
- }
-.voter_pic{
-	margin:0 auto;
+.player_.player_0 iframe{
+	height:300px;
+	width:300px;
+	border:2px solid green;
 }
 
- .filters, .counts{
-list-style:none;
-	margin:1% 0;
- }
-
-
-
- .filter-btns{
- 	list-style-type:none;
- }
-
-.filter-btns li {
-    border-radius: 3px;
-    float: left;
-    list-style: outside none none;
-    margin: 0 9px 0 0;
-    background:#95a5a6;
-    text-align:center;
-}
-.filter-btns li:hover {
- 
-    background:#ecf0f1;
-   
-}
-
- .filter-btns li a{
-	margin:1% 0;
-	padding:3px;
-	color:#000;
- }
-
-.vote-btn{
-	  background:#e67e22;
-	  margin-right:12px;
-	padding:3px;
-	color:#000;
-	    list-style: outside none none;
- border-radius: 3px;
-	float:left;
-}
-.vote-btn a{
-	color:#000;
-}
-
-
-.charttotal{
-	    width:100%;
-		float: left;
-		border:1px solid #ecf0f1;
-
-
-}
-
-.charttotal h3{
-	 text-align:center;
-
-
-}
-.chartsgroup{
-    float: left;
-    width: 100%;
-}
-.chartgroup{
-	 float: left;
-     width: 14%;
-     border-right:1px solid #ecf0f1;
-     padding:1%;
-}
-.chartgroup:last-child{	
-     border-right:none;
-}
-
-.chartgroup h4{
-	text-align:center;
-}
-
-
-.left{
-	float:left;
-	width: 25%;
-	margin-right: 2%;
-}
-.right{
-	float:left;
-	width: 55%;
-}
 
 footer{
-	background:#000;
+	
 	color:#fff;
 	text-align:center;
 	padding:1% 0;

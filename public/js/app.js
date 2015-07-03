@@ -14,7 +14,8 @@ angular.module('lobbycitoyen',  [
   'lobbycitoyen.voteRest',
   'lobbycitoyen.UserService',
   'lobbycitoyen.Socket',
-  'n3-pie-chart'
+  'n3-pie-chart',
+  'LocalStorageModule'
   ]).
   config(['$localeProvider','$routeProvider', '$locationProvider','$sceDelegateProvider', '$sceProvider', function($localeProvider,$routeProvider, $locationProvider, $sceDelegateProvider,$sceProvider ) {
     $routeProvider.
@@ -38,10 +39,10 @@ angular.module('lobbycitoyen',  [
         templateUrl: '/partials/document/new',
         controller: VoteCtrl
       }).
-      when('/vote/:docid/:widget?/:widgettype?', {
+      when('/server/:id', {
         // match doc, doc_editor
         templateUrl: '/../partials/vote/single',
-        controller: VoteCtrl
+        controller: PlayerCtrl
       }).
       when('#_=_', {
         redirectTo: '/'

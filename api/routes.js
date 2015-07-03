@@ -51,7 +51,7 @@ module.exports = function(app, passport, auth) {
     // views & partials
 
 
-    app.get('/vote/:slug/:widget?/:type?',                   voteCtrl.single);
+    app.get('/server/:id',                       voteCtrl.single);
 
 
 

@@ -28,7 +28,7 @@ nconf.argv().env().file({file:'config.json'});
 var auth = require('./api/authorization');
 var db = mongoose.connection;
 var dbz = mongoose.connect('mongodb://localhost/'+nconf.get('DB_NAME'));
-
+var players_;
 
 
 // models auto load
@@ -180,13 +180,27 @@ var io =  require('socket.io').listen(server, {log:true, origins:'*:*'}, functio
   console.log(chalk.green('Hello io') );
 })
 
+if(!players_){
+        console.log('fresh') 
+
+        var players_ = []
+        var player_bus = {'server_target': 2, 'lat':'48.8819132031', 'long': '2.3260', 'videos': [{'provider': 'youtube', 'url': 'https://www.youtube.com/embed/Pj6GbXcOoCo?autoplay=1&loop=1'}, {'provider': 'vimeo', 'url': 'https://vimeo.com/131077465'}] } 
+        players_.push(player_bus)
+        console.log(players_)
+    }
+
+
 io.on('connection', function (socket) {
       console.log(chalk.green('Hello io') );
 
-    socket.on('ping', function(data){
-     require('./api/socket').socketer(socket, data);
+        socket.on('ping', function(data){
+     require('./api/socket').socketer(socket, data, players_);
   });
     
+    socket.on('push', function(data){
+     require('./api/socket').pusher(socket, data, players_);
+  });
+
 });
 // logger.init(app, passport, mongoose);
 //expose app

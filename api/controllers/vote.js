@@ -74,79 +74,16 @@ var groupslist = new Array('LES-REP','SRC','RDSE','SOC','SOCV','UDI','CRC','CRC-
 	* @todo nothing
 	*/
  	exports.single= function(req, res) {
-
- 		var debugger_on = 'true' /// fix database for broken meta_options.
-
-		var user_ = ''
-		if(req.user){
-			// user_ = new Object({'_id': req.user._id , 'username': req.user.username,  'image_url': req.user.image_url})
-		}
-		var doc_req_slug 	  = 'homepage';
-		var doc_slug_discret  =  nconf.get('ROOT_URL')+':'+nconf.get('PORT');
-		if(req.params.slug){
-			doc_req_slug = req.params.slug;
-			doc_slug_discret  +=  '/vote/'+req.params.slug;
-		}
-
-		// miniquery.
-		var query = Vote.findOne({ 'slug':doc_req_slug });
-			query.populate('user','-email -hashed_password -salt').populate( {path:'voters.user_id', select:'-salt -email -hashed_password', model:'User'}).populate({path:'voters.doc_id', select:'-markups -secret', model:'Vote'}).populate('voters.doc_id.user').exec(function (err, doc) {
-			if (err){
-				res.json(err)
-			} else{
-				if(doc){
-					if(doc.published == 'draft')
-					{
-								var user_can	= exports.test_owner_or_key(doc,req)
-								if(!user_can){
-									var redirect_to = nconf.get('ROOT_URL')+':'+nconf.get('PORT')
-									if(req.params.slug){
-										redirect_to += '/doc/'+req.params.slug;
-									}
-									
-									 var message = 'This doc is a draft : <a style="text-decoration:underline;" href="/login?redirect_url='+redirect_to+'">login</a> if your are doc owner or grab "secret key" <a style="text-decoration:underline;" href="'+nconf.get('ROOT_URL')+'"> &laquo; Back </a>';
-									 res.render('error', { title: 'no access', message: message} );
-									 return;
-								}
-					}
-
-
-					var doc_include_js=''
-					var doc_include_css= '';
-
-					var new_doc_options = []
-					_.each(doc.doc_options , function (option, i){
-						
-
-						if(option.option_name == 'doc_include_js' ){			 	
-							doc_include_js += option.option_value;
-						}
-						if(option.option_name == 'doc_include_css' ){			 	
-							doc_include_css += option.option_value;
-						}
+res.render('vote', {
+						user_in : 'user_',
+						doc_title : 'doc.title',
+						raw_content : 'doc.content',
+						doc_thumbnail : 'doc.thumbnail',
+						doc_excerpt: 'doc.excerpt',
+						doc_slug_discret : 'doc_slug_discret',
+						doc_include_js : 'doc_include_js',
+						doc_include_css : 'doc_include_css' 
 					});
-					
-
-					
-
-
-				//	console.log('public doc rendered')	
-					res.render('vote', {
-						user_in : user_,
-						doc_title : doc.title,
-						raw_content : doc.content,
-						doc_thumbnail : doc.thumbnail,
-						doc_excerpt: doc.excerpt,
-						doc_slug_discret : doc_slug_discret,
-						doc_include_js : doc_include_js,
-						doc_include_css : doc_include_css 
-					});
-				} // has doc
-				else{
-					res.json(err)
-				}
-			}
-		});
 	}
 
 

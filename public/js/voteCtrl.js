@@ -1,11 +1,39 @@
-'use strict';
+
 var inheriting = {};
 var GLOBALS;
 var _;
 angular.module('lobbycitoyen.document_controller', []);
 
+function PlayerCtrl($scope, $http , $window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService) {
 
-function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService) {
+	
+	var socket = io.connect();
+		$scope.playlist = []
+		//$scope.playing = {'provider': null, 'url': false, 'from': null}
+	$scope.ui = {}
+	$scope.ui.ready =true;
+$scope.ui.lauched =false;
+
+	socket.on('pong', function(data){
+	  
+
+
+
+	  	if(data.server_target == $routeParams.id){
+	  		$scope.playing = data
+	  		$scope.$digest();
+	  	}
+	   
+	  });
+
+
+
+
+
+
+
+}
+function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService,localStorageService) {
 		$scope.ui = {}
 		$scope.playlist = []
 		$scope.playing = {'provider': null, 'url': false, 'from': null}
@@ -16,12 +44,21 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
       	$scope.i18n                       = $locale;
   		var socket = io.connect('');
 
+
+  		$scope.submit = {'provider': 'youtube', 'url': ''}
+
       	$scope.addtoqueue = function(){
-				var d = {'sd':'d'}
-				socket.emit('ping', d)
-				alert('done')
+			
+				socket.emit('push', $scope.submit)
+				
 
       	}
+
+
+ 
+   var t = localStorageService.set('key', 'val');
+   var g = localStorageService.get('key');
+   console.log(g)
 
 	 
 	  socket.on('pong', function(data){
