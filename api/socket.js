@@ -53,7 +53,7 @@ exports.socketer = function(socket, data, players_){
 			else{
 				console.log('else')
 			}
-			player.distance = Math.floor(diff*1000)
+			player.distance = (diff*1000)
 	 		socket.emit('pong', player);
      		socket.broadcast.emit('pong', player);
 
