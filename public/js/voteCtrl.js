@@ -7,22 +7,27 @@ angular.module('lobbycitoyen.document_controller', []);
 
 function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService) {
 		$scope.ui = {}
+		$scope.playlist = []
+		$scope.playing = {'provider': null, 'url': false, 'from': null}
+
 		$scope.ui.sockets_refresh =false
 		$scope.render_config = new Object()
       	$scope.render_config.i18n =  $locale;
       	$scope.i18n                       = $locale;
-  var socket = io.connect('');
+  		var socket = io.connect('');
 
       	$scope.addtoqueue = function(){
-var d = {'sd':'d'}
-								socket.emit('news', d)
-								alert('done')
+				var d = {'sd':'d'}
+				socket.emit('ping', d)
+				alert('done')
 
       	}
 
 	 
-	  socket.on('newsback', function(data){
-	   alert('sd')
+	  socket.on('pong', function(data){
+	  	console.log(data);
+
+	   
 	  });
 
 
@@ -41,6 +46,10 @@ var d = {'sd':'d'}
 						$scope.clientlat = position.coords.latitude;
 				  		$scope.clientlon = position.coords.longitude;
 				  		console.log($scope)
+
+						var p = {'lat':position.coords.latitude+0.001, 'long': position.coords.longitude }
+						socket.emit('ping', p)
+
 						$scope.$digest();
 				   });
 				  } else {

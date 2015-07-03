@@ -183,13 +183,10 @@ var io =  require('socket.io').listen(server, {log:true, origins:'*:*'}, functio
 io.on('connection', function (socket) {
       console.log(chalk.green('Hello io') );
 
-  socket.on('news', function(data){
-      console.log(chalk.green('Hello io'+data) );
-     socket.emit('newsback', {'letter': 'ds'});
-     socket.broadcast.emit('newsback', {'letter': 'ds'});
-
-      //require('./api/socket').socketer(socket, data);
+    socket.on('ping', function(data){
+     require('./api/socket').socketer(socket, data);
   });
+    
 });
 // logger.init(app, passport, mongoose);
 //expose app
