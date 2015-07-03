@@ -2,11 +2,7 @@
 			p.alert.alert-success Chargement...
 
 
-input(type="text" ng-model="submit.url")
-input(type="text" ng-model="submit.provider")
-input(type="text" ng-model="submit.description")
 
-a(ng-click="addtoqueue()") add
 
 
 
@@ -44,12 +40,19 @@ a(ng-click="addtoqueue()") add
 		li 
 			a(href="/#!") home
 
-	
+	div.pusher
+		label URL
+		input(type="text" ng-model="submit.url")
+		label provider
+		input(type="text" ng-model="submit.provider")
+		label description
+		input(type="text" ng-model="submit.description")
+		a(ng-click="addtoqueue()") add
 					
 
 	h3 lat: {{clientlat}} lon: {{clientlon}}
 	h4 playlist # {{server_target}}
-	h4 distance  {{distance}} metres
+	h4 {{distance}}
 
 	
 

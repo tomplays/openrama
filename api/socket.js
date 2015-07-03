@@ -36,41 +36,18 @@ exports.socketer = function(socket, data, players_){
 
 			var diff = Math.sqrt(delta_long + delta_lat)
 			
-
 			console.log('delta_lat'+delta_lat) 
 			console.log('delta_lat'+delta_long) 
 			
-
 			console.log('diff'+diff)
-
-
-
 			if(diff<0.00006270591957237519){
 				console.log('1 metre far')
-				
-			
 			}
 			else{
 				console.log('else')
 			}
-			player.distance = (diff*1000)
+			player.distance = diff*100000
 	 		socket.emit('pong', player);
      		socket.broadcast.emit('pong', player);
-
-
-
-
 	})
-
-
-	console.log('socket data')
-	console.log(data)
-	console.log(chalk.green('got ping'))
-
-    
-
-	//socket.emit('newsback', data)
-	//socket.broadcast.to('homepage').emit('newsback', data)
-	//io.sockets.in(room).emit('message', data);
-	//socket.broadcast.emit('newsback', data)
 }

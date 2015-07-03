@@ -16,7 +16,7 @@ $scope.ui.lauched =false;
 
 	socket.on('pong', function(data){
 	  
-
+ 		
 
 
 	  	if(data.server_target == $routeParams.id){
