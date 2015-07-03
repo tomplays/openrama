@@ -12,7 +12,7 @@ exports.socketer = function(socket, data){
 	var players_ = []
 
 
-	var player_bus = {'lat':'48.8818496', 'long': '2.326056' }
+	var player_bus = {'lat':'48.8819132031', 'long': '2.3260' }
 
 players_.push(player_bus)
 console.log(players_)
@@ -21,9 +21,9 @@ console.log(players_)
 	_.each(players_, function(player){
 
 			var delta_lat = Math.pow(player.lat - data.lat, 2)
-			var delta_long = Math.pow(player.long - data.long,2)
+			var delta_long = Math.pow(player.long - data.long, 2)
 
-			var diff = Math.sqrt(delta_long+delta_lat)
+			var diff = Math.sqrt(delta_long + delta_lat)
 			console.log('delta_lat'+delta_lat) 
 			console.log('delta_lat'+delta_long) 
 			console.log('diff'+diff)
