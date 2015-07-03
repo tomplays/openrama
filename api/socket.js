@@ -12,7 +12,7 @@ exports.socketer = function(socket, data){
 	var players_ = []
 
 
-	var player_bus = {'lat':'48.8819132031', 'long': '2.3260' }
+	var player_bus = {'lat':'48.8819132031', 'long': '2.3260' } 
 
 players_.push(player_bus)
 console.log(players_)
@@ -24,13 +24,17 @@ console.log(players_)
 			var delta_long = Math.pow(player.long - data.long, 2)
 
 			var diff = Math.sqrt(delta_long + delta_lat)
+			
+
 			console.log('delta_lat'+delta_lat) 
 			console.log('delta_lat'+delta_long) 
+			
+
 			console.log('diff'+diff)
 
 
 
-			if(diff<0.000009174311926605506){
+			if(diff<0.001){
 				console.log('1 metre far')
 			}
 			else{
