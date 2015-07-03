@@ -44,13 +44,13 @@ head
 	script(type='text/javascript',  src='js/libs/pie-chart.min.js')
 	script(type='text/javascript',  src='js/libs/social.js')
 
+	script(type='text/javascript',  src='js/geo.js')
 
 
 	// user 
 	script(type='text/javascript', src='js/UserVote.js')
 	
-	if(socket_url !== '')
-		script(src='#{socket_url}:#{socket_server_port}/socket.io/socket.io.js')
+	script(src='/socket.io/socket.io.js')
 	
 	// Misc libs/utils
 	script(type='text/javascript', src='js/libs/script.min.js')
@@ -62,5 +62,4 @@ head
 
 
 	//
-			Concept Elliot Lepers, Tom Wersinger
 			code by Tom Wersinger /-) 

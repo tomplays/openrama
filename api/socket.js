@@ -9,5 +9,5 @@ exports.socketer = function(socket, data){
 	//socket.emit('newsback', data)
 	//socket.broadcast.to('homepage').emit('newsback', data)
 	//io.sockets.in(room).emit('message', data);
-	socket.broadcast.emit('newsback', data)
+	//socket.broadcast.emit('newsback', data)
 }

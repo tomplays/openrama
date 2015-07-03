@@ -1,24 +1,30 @@
 'use strict';
-
-/*
-
-
-controllers for vote and home
-
-	
-*/
 var inheriting = {};
 var GLOBALS;
 var _;
 angular.module('lobbycitoyen.document_controller', []);
 
 
-function HomeCtrl($scope, $http , $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService) {
+function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService) {
 		$scope.ui = {}
 		$scope.ui.sockets_refresh =false
 		$scope.render_config = new Object()
       	$scope.render_config.i18n =  $locale;
       	$scope.i18n                       = $locale;
+  var socket = io.connect('');
+
+      	$scope.addtoqueue = function(){
+var d = {'sd':'d'}
+								socket.emit('news', d)
+								alert('done')
+
+      	}
+
+	 
+	  socket.on('newsback', function(data){
+	   alert('sd')
+	  });
+
 
 		$scope.ui.ready = false;
 		var promise = VoteRest.votes_home({},{ }).$promise;
@@ -28,8 +34,21 @@ function HomeCtrl($scope, $http , $sce, $location, $routeParams, $locale,$timeou
 		          $scope.user_logged 		= Result.userin;
 		          $scope.votes 				= Result.votes;
 		          $scope.ui.sockets_refresh = true
-				  $scope.ui.ready =true;
-				}
+		          $scope.ui.ready =true;
+		          if(navigator.geolocation){
+				   	navigator.geolocation.watchPosition(function(position){
+				   		$scope.position = position
+						$scope.clientlat = position.coords.latitude;
+				  		$scope.clientlon = position.coords.longitude;
+				  		console.log($scope)
+						$scope.$digest();
+				   });
+				  } else {
+				   $scope.ui.ready =true;
+				   alert("Your browser or device doesn't support Geolocation");
+				  }
+								  
+								}
 		}.bind(this));
 	    promise.catch(function (response) {     
 	      console.log(response);
