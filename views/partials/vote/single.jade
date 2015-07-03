@@ -6,7 +6,11 @@ div(id="fb-root")
 	
 	
 	div(class="player_ player_{{$index}}" ng-repeat="v in playing.videos track by $index")
+
 		iframe(ng-if="v.provider == 'youtube'" ng-src="{{v.url}}"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen)
+		h3 {{v.time}} minutes
+		h4 {{v.description}}
+
 footer
 	a(href="") 
 		span(ng-if="ui.iswidget") un widget   

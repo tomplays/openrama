@@ -8,15 +8,15 @@ var chalk = require('chalk'),
 
 exports.pusher = function(socket, data, players_){
 			console.log('pusher') 
-
 			console.log(players_) 
-
-_.each(players_, function(player){
-
-	player.videos.push(data)
-})
-
-
+			data.time = '2.57';
+			//data.description = "tro b1 7 vidéo"
+			_.each(players_, function(player){
+				if(player.server_target == data.server_target){
+					player.videos.push(data)
+				}
+				
+			})
 			socket.emit('pushed', data);
      		socket.broadcast.emit('pushed', data);
 
@@ -53,9 +53,9 @@ exports.socketer = function(socket, data, players_){
 			else{
 				console.log('else')
 			}
-
-	 			socket.emit('pong', player);
-     			socket.broadcast.emit('pong', player);
+			player.distance = Math.floor(diff*1000)
+	 		socket.emit('pong', player);
+     		socket.broadcast.emit('pong', player);
 
 
 

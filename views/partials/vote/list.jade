@@ -4,6 +4,7 @@
 
 input(type="text" ng-model="submit.url")
 input(type="text" ng-model="submit.provider")
+input(type="text" ng-model="submit.description")
 
 a(ng-click="addtoqueue()") add
 
@@ -26,7 +27,7 @@ a(ng-click="addtoqueue()") add
 					|       
 				a.navbar-brand(href='/#!') #{locals.site_title}
 				
-			ul.nav.navbar-nav.navbar-right
+			// ul.nav.navbar-nav.navbar-right
 				li(ng-if="!user_logged")
 					a(ng-href="#{root_url}:#{port}/login") {{render_config.i18n.CUSTOM.USER.login}}
 					a(ng-href="#{root_url}:#{port}/signup") {{render_config.i18n.CUSTOM.USER.register}}
@@ -43,26 +44,14 @@ a(ng-click="addtoqueue()") add
 		li 
 			a(href="/#!") home
 
-	div.jumbotron
-			div.container
-				h4 
-				h5 
-					a(href="/signup") En créant un compte 
-					, vous pouvez egalement exprimer votre avis 
-				// div.user_notlogged(ng-if="!user_logged")
-					a.btn.btn-primary(href="/login") Se connecter
+	
 					
 
 	h3 lat: {{clientlat}} lon: {{clientlon}}
+	h4 playlist # {{server_target}}
+	h4 distance  {{distance}} metres
 
-
-	ul.vote.list-group(ng-repeat='vote in votes')
-		li.list-group-item
-			h4 
-				a(href="/vote/{{vote.slug}}") {{vote.title}} 
-			// h5 {{vote.status}} {{vote.updated}}
-			p(ng-bind-html="vote.excerpt" )
-
+	
 
 
 	footer

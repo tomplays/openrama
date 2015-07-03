@@ -28,9 +28,8 @@ nconf.argv().env().file({file:'config.json'});
 var auth = require('./api/authorization');
 var db = mongoose.connection;
 var dbz = mongoose.connect('mongodb://localhost/'+nconf.get('DB_NAME'));
-var players_;
 
-
+var player_;
 // models auto load
 var models_path = __dirname + '/api/models';
 var walk = function(path) {
@@ -180,14 +179,14 @@ var io =  require('socket.io').listen(server, {log:true, origins:'*:*'}, functio
   console.log(chalk.green('Hello io') );
 })
 
-if(!players_){
+//if(!players_){
         console.log('fresh') 
 
         var players_ = []
-        var player_bus = {'server_target': 2, 'lat':'48.8819132031', 'long': '2.3260', 'videos': [{'provider': 'youtube', 'url': 'https://www.youtube.com/embed/Pj6GbXcOoCo?autoplay=1&loop=1'}, {'provider': 'vimeo', 'url': 'https://vimeo.com/131077465'}] } 
+        var player_bus = {'server_target': 'abribus1','lat':'48.8819132031', 'long': '2.3260', 'videos': [{'provider': 'youtube', 'url': 'https://www.youtube.com/embed/Pj6GbXcOoCo?autoplay=1&loop=1', 'time':'3.02', 'description': 'blou bla bla'}] } 
         players_.push(player_bus)
         console.log(players_)
-    }
+ //   }
 
 
 io.on('connection', function (socket) {

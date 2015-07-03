@@ -76,6 +76,28 @@ nconf.argv().env().file({file:'config.json'});
     res.render('error', { title: 'Nothing here', message: message} );
   };
 
+  
+exports.home= function(req, res) {
+      var user_ = {};
+
+       if(req.user){
+        user_ = req.user.toObject()
+  
+      }
+    
+      res.render('vote', {
+        user_in : user_,
+        doc_title : 'Accueil',
+        raw_content : '',
+        doc_thumbnail : '',
+        doc_excerpt: '',
+        doc_slug_discret : '',
+        doc_include_js : '',
+        doc_include_css : '' 
+      });     
+    
+    
+  }
 
   /**
   * @description
@@ -83,8 +105,17 @@ nconf.argv().env().file({file:'config.json'});
   * @link 
   * @todo nothing
   */
+  exports.single= function(req, res) {
+res.render('vote', {
+            user_in : 'user_',
+            doc_title : 'doc.title',
+            raw_content : 'doc.content',
+            doc_thumbnail : 'doc.thumbnail',
+            doc_excerpt: 'doc.excerpt',
+            doc_slug_discret : 'doc_slug_discret',
+            doc_include_js : 'doc_include_js',
+            doc_include_css : 'doc_include_css' 
+          });
+  }
 
-  exports.sockets_list = function(req, res) {
-           var user_ = new Object({'username': null,  'image_url':null})
-           res.render('vote', { user_in:user_ } );
-  };
+
