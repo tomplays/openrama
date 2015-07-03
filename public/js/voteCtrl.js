@@ -47,9 +47,8 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
 				  		$scope.clientlon = position.coords.longitude;
 				  		console.log($scope)
 
-						var p = {'lat':position.coords.latitude+0.001, 'long': position.coords.longitude }
+						var p = {'lat':position.coords.latitude, 'long': position.coords.longitude }
 						socket.emit('ping', p)
-
 						$scope.$digest();
 				   });
 				  } else {
