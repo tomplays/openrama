@@ -118,8 +118,14 @@ $scope.$digest();
 
 	  			if(i==0){
 	  				v.playing=true
-	  				v.url +='?autoplay=1&loop=1' 
+	  				v.url +='?autoplay=1&loop=1&controls=0&showinfo=0' 
 	  			}
+	  			else{
+	  				v.url +='?&controls=0&showinfo=0' 
+
+	  			}
+	  			
+	  		
 	  			
 
 	  		})
