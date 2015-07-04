@@ -154,7 +154,11 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
   		var socket = io.connect();
 
 
-  		$scope.submit = { 'url_1': 'https://www.youtube.com/embed/P_V2b0VZK1M', 'url_2': 'https://www.youtube.com/embed/P_V2b0VZK1M', 'url_3': 'https://www.youtube.com/embed/P_V2b0VZK1M'}
+
+
+
+
+  		$scope.submit = { 'url_1': 'https://www.youtube.com/embed/AuX-KorBIZg ', 'url_2': 'https://www.youtube.com/embed/Lwb-GEiykRo', 'url_3': 'https://www.youtube.com/embed/0E3u6ALWYcg'}
 
       	$scope.addtoqueue = function(val){
 
