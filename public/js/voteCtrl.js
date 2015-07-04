@@ -110,6 +110,7 @@ $scope.$digest();
 	  		console.log(data)
 
 	  		$scope.playing = data
+	  		//$scope.playing.videos.reverse(); 
 
 
 	  		_.each($scope.playing.videos, function(v,i){
@@ -158,7 +159,7 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
 
 
 
-  		$scope.submit = { 'url_1': 'https://www.youtube.com/embed/AuX-KorBIZg ', 'url_2': 'https://www.youtube.com/embed/Lwb-GEiykRo', 'url_3': 'https://www.youtube.com/embed/0E3u6ALWYcg'}
+  		$scope.submit = { 'url_1': 'https://www.youtube.com/embed/AuX-KorBIZg ', 'url_2': 'https://www.youtube.com/embed/Lwb-GEiykRo', 'url_3': 'https://www.youtube.com/embed/Of2HU3LGdbo'}
 
       	$scope.addtoqueue = function(val){
 
