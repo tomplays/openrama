@@ -9,16 +9,17 @@ var chalk = require('chalk'),
 exports.pusher = function(socket, data, players_){
 			console.log('pusher') 
 			console.log(players_) 
-			data.time = '2.57';
+			
 			//data.description = "tro b1 7 vidéo"
-			_.each(players_, function(player){
-				if(player.server_target == data.server_target){
-					player.videos.push(data)
-				}
+			_.each(players_, function(player,i){
+				
+					players_[i].videos.push(data)
+					socket.emit('pong', player);
+     				socket.broadcast.emit('pong', player);
+					return players_;
 				
 			})
-			socket.emit('pushed', data);
-     		socket.broadcast.emit('pushed', data);
+			
 
 }
 

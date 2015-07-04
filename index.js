@@ -183,7 +183,22 @@ var io =  require('socket.io').listen(server, {log:true, origins:'*:*'}, functio
         console.log('fresh') 
 
         var players_ = []
-        var player_bus = {'server_target': 'abribus1','lat':'48.8819132031', 'long': '2.3260', 'videos': [{'provider': 'youtube', 'url': 'https://www.youtube.com/embed/Pj6GbXcOoCo?autoplay=1&loop=1', 'time':'3.02', 'description': 'blou bla bla'}] } 
+        var player_bus = {'server_target': 'abribus1','lat':'48.8819132031', 'long': '2.3260', 
+        'videos': [
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/FKz2UvuY6YY', 'time':'3.02', 'description': 'blou bla bla'},
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/B3eAMGXFw1o', 'time':'3.02', 'description': 'blou bla bla'},
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/ZTidn2dBYbY', 'time':'3.02', 'description': 'blou bla bla'},
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/T4LVXCCmIKA', 'time':'3.02', 'description': 'blou bla bla'},
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/UNpOeGIrNeQ', 'time':'3.02', 'description': 'blou bla bla'},
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/vKHZ8ek-6ccc ', 'time':'3.02', 'description': 'blou bla bla'},
+            {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/5YLabmf5pu0 ', 'time':'3.02', 'description': 'blou bla bla'},
+           
+
+
+
+
+
+            ] } 
         players_.push(player_bus)
         console.log(players_)
  //   }
@@ -197,7 +212,14 @@ io.on('connection', function (socket) {
   });
     
     socket.on('push', function(data){
-     require('./api/socket').pusher(socket, data, players_);
+        _.each(players_, function(player,i){
+                 
+                    players_[i].videos.push(data)
+                    socket.emit('pong', players_[i]);
+                    socket.broadcast.emit('pong',players_[i]);
+                    return players_;
+                
+            })
   });
 
 });

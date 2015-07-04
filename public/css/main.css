@@ -1,21 +1,80 @@
-.player_ iframe{
-	border:2px solid red;
-	height:100px;
-	width:100px;
-}
-
-.player_.player_0 iframe{
-	height:300px;
-	width:300px;
-	border:2px solid green;
-}
-
-
-footer{
+.logo {
 	
-	color:#fff;
-	text-align:center;
-	padding:1% 0;
-	width:100%;
-	float:left;
+	position:absolute;
+	top:1%;
+	z-index:9999999;
+	left:1%;
+
 }
+
+
+
+
+.logo img{
+	height:200px;
+	width:300px;
+	
+}
+
+
+.businfos{
+	position:absolute;
+	top:300px;
+	z-index:9999999;
+	right:2%;
+
+}
+.notif{
+
+	position:absolute;
+	top:1%;
+	width:273px;
+	height:121px;
+	z-index:9999999;
+	right:2%;
+}
+
+.progress{
+	position:absolute;
+	top:400px;
+	z-index:9999999;
+	left:1%;
+
+
+}
+.container {
+    width:100%;
+    margin:0;
+    padding:0;
+    background: #000;
+}
+
+.player_ iframe{
+	
+	min-height:300px;
+	width:100%;
+	
+}
+
+
+.player_{
+		min-height:300px;
+
+	margin:0;
+	padding:0;
+	position:relative;
+	top:-5px;
+	float:left;
+	width:33%;
+
+}
+.player_.player_0 {
+  	top:0px;
+  	   min-height: 500px;
+    width: 100%;
+}
+.player_.player_0 iframe{
+    min-height: 500px;
+    width: 100%;
+}
+

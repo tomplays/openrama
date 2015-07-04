@@ -4,23 +4,133 @@ var GLOBALS;
 var _;
 angular.module('lobbycitoyen.document_controller', []);
 
-function PlayerCtrl($scope, $http , $window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService) {
+function PlayerCtrl($scope, $http , $timeout, $window, $sce, $location, $routeParams, $locale,$timeout, VoteRest, vendorService,localStorageService) {
 
+
+
+
+
+$scope.save = function(v){
+
+   //
+  
+   
+
+   var g = localStorageService.get('videosz');
+
+  
+   if(g){
+   		v.saved = true
+   	 g.push(v)
+   	  console.log(g)
+   	 localStorageService.set('videosz', g);
+
+   }else{
+   	 var f = []
+  	localStorageService.set('videosz', f);
+   }
+
+
+  
+
+
+}
+
+	$scope.playpause = function(v){
+		_.each($scope.playing.videos, function(vi,i){
+vi.playing=false;
+				if(v==vi){
+				
+					$scope.playing.videos = _.without($scope.playing.videos, vi)
+				
+					$scope.playing.videos.push(vi)
+				}
+
+
+				if(i==0){
+						vi.playing=true;
+				}
+
+
+		})
+		$scope.playing.videos[0].playing=true
+
+$scope.$digest();
+		//v.playing==true
+
+
+	}
 	
 	var socket = io.connect();
+		  	//	$scope.saved = localStorageService.get('videosz');
+
 		$scope.playlist = []
 		//$scope.playing = {'provider': null, 'url': false, 'from': null}
 	$scope.ui = {}
 	$scope.ui.ready =true;
-$scope.ui.lauched =false;
+	$scope.ui.lauched =false;
+
+
+	$timeout(function(){
+			$scope.ui.lauched= false
+
+	},3000)
+
+$scope.next = function (){
+
+
+	
+_.each($scope.playing.videos, function(vi,i){
+vi.playing=false;
+				if(i==0){
+					vi.url = vi.url.replace('?autoplay=1&loop=1', '')
+					$scope.playing.videos = _.without($scope.playing.videos, vi)
+					$scope.playing.videos.push(vi)
+				}
+
+
+				
+
+
+		})
+		$scope.playing.videos[0].playing=true
+		$scope.playing.videos[0].url +='?autoplay=1&loop=1' 
+
+
+$scope.$digest();
+		}
 
 	socket.on('pong', function(data){
 	  
  		
-
-
+		
 	  	if(data.server_target == $routeParams.id){
+	  		//&& $scope.ui.lauched == false
+	  		
+	  		console.log(data)
+
 	  		$scope.playing = data
+
+
+	  		_.each($scope.playing.videos, function(v,i){
+	  			v.playing==false
+
+	  			if(i==0){
+	  				v.playing=true
+	  				v.url +='?autoplay=1&loop=1' 
+	  			}
+	  			
+
+	  		})
+			$scope.notice = true
+
+	  		$timeout(function(){
+
+				$scope.notice = false
+	  		},3000)
+	  		
+
+	  		//$scope.playing.videos.push($scope.saved)
 	  		$scope.$digest();
 	  	}
 	   
@@ -28,8 +138,7 @@ $scope.ui.lauched =false;
 
 
 
-
-
+	
 
 
 }
@@ -45,22 +154,35 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
   		var socket = io.connect();
 
 
-  		$scope.submit = {'provider': 'youtube', 'url': 'https://www.youtube.com/embed/Pj6GbXcOoCo?autoplay=1&loop=1'}
+  		$scope.submit = { 'url_1': 'https://www.youtube.com/embed/P_V2b0VZK1M', 'url_2': 'https://www.youtube.com/embed/P_V2b0VZK1M', 'url_3': 'https://www.youtube.com/embed/P_V2b0VZK1M'}
 
-      	$scope.addtoqueue = function(){
-      		var s = $scope.submit
+      	$scope.addtoqueue = function(val){
+
+
+      		var s = {'provider': 'youtube'}
+      		if(val == 1){
+      			s.url = $scope.submit.url_1
+      		}
+      		if(val == 2){
+      			s.url = $scope.submit.url_2
+      		}
+      		if(val == 3){
+      			s.url = $scope.submit.url_3
+      		}
+
+      		$scope.ajoute = 'video ajouté à la playlist'
       		s.server_target = $scope.server_target
-			
-				socket.emit('push', s)
+
+
+      		console.log(s)
+			socket.emit('push', s)
 				
 
       	}
 
 
  
-   var t = localStorageService.set('key', 'val');
-   var g = localStorageService.get('key');
-   console.log(g)
+
 
 	 
 	  socket.on('pong', function(data){
@@ -78,6 +200,10 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
 	
 		          $scope.ui.sockets_refresh = true
 		          $scope.ui.ready =true;
+		         $scope.once = true
+
+
+
 		          if(navigator.geolocation){
 				   	navigator.geolocation.watchPosition(function(position){
 				   		$scope.position = position
@@ -85,8 +211,22 @@ function HomeCtrl($scope, $http ,$window, $sce, $location, $routeParams, $locale
 				  		$scope.clientlon = position.coords.longitude;
 				  		
 						var p = {'lat':position.coords.latitude, 'long': position.coords.longitude }
-						socket.emit('ping', p)
-						$scope.$digest();
+						
+
+
+		          if($scope.once  == true){
+$scope.once = false
+		          	socket.emit('ping', p)
+					$scope.$digest();
+		          }
+
+					
+	  	
+					
+
+
+
+
 				   });
 				  } else {
 				   $scope.ui.ready =true;

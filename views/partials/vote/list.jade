@@ -1,61 +1,19 @@
-.container-fluid(ng-hide="ui.ready == true")
-			p.alert.alert-success Chargement...
-
-
-
-
-
-
-
-.container-fluid(ng-if="ui.ready")
-
-	nav.navbar.navbar-default
-		.container-fluid
-			.navbar-header
-				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-					span.sr-only Toggle navigation
-					|         
-					span.icon-bar
-					|         
-					span.icon-bar
-					|         
-					span.icon-bar
-					|       
-				a.navbar-brand(href='/#!') #{locals.site_title}
-				
-			// ul.nav.navbar-nav.navbar-right
-				li(ng-if="!user_logged")
-					a(ng-href="#{root_url}:#{port}/login") {{render_config.i18n.CUSTOM.USER.login}}
-					a(ng-href="#{root_url}:#{port}/signup") {{render_config.i18n.CUSTOM.USER.register}}
-
-				li(ng-if="user_logged") 
-					span {{user_logged.username}} |
-						a(ng-href="#{root_url}:#{port}/me/account") {{render_config.i18n.CUSTOM.USER.myprofile}}
-
-						
-
-
-
-	ol.breadcrumb
-		li 
-			a(href="/#!") home
-
+div
 	div.pusher
 		label URL
-		input(type="text" ng-model="submit.url")
-		label provider
-		input(type="text" ng-model="submit.provider")
-		label description
-		input(type="text" ng-model="submit.description")
-		a(ng-click="addtoqueue()") add
-					
+		input(type="text"  ng-model="submit.url_1")
+		a(ng-click="addtoqueue(1)") add(video1)
+		input(type="text"  ng-model="submit.url_2")
+		a(ng-click="addtoqueue(2)") add(video2)
+
+		input(type="text"  ng-model="submit.url_1")
+		a(ng-click="addtoqueue(3)") add(video3)
+
+		
+	p {{ajoute}}
+		
+
 
 	h3 lat: {{clientlat}} lon: {{clientlon}}
 	h4 playlist # {{server_target}}
-	h4 {{distance}}
-
-	
-
-
-	footer
-			a(href="/") 
+	h4 {{distance}}	
