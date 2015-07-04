@@ -15,7 +15,6 @@
 
 
 
-	h1 {{playing.videos.length}}
 	div( class="player_ player_{{$index}}" ng-repeat="v in playing.videos track by $index")
 		iframe(id="player_{{$index}}" ng-if="v.provider == 'youtube' " ng-src="{{v.url}}"  frameborder="0" webkitallowfullscreen autoplay="true" mozallowfullscreen allowfullscreen)
 		// h3 {{v.time}} minutes
